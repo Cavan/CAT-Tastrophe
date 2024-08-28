@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbchfroa54e5d"]
+
+[ext_resource type="Texture2D" uid="uid://hyp5d81rmdw8" path="res://Levels/Level_1.jpg" id="1_3i6vi"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 2560.0
+offset_bottom = 1706.0
+scale = Vector2(0.624171, 0.528272)
+texture = ExtResource("1_3i6vi")
+stretch_mode = 3

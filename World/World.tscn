@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw4pd4mmxmkjo"]
+
+[ext_resource type="PackedScene" uid="uid://cbchfroa54e5d" path="res://Levels/level_1.tscn" id="1_7mv3a"]
+[ext_resource type="PackedScene" uid="uid://dmcffdesscyic" path="res://enemy/boss_chonky.tscn" id="1_ck8t5"]
+[ext_resource type="PackedScene" uid="uid://dpu2360hm3dxl" path="res://Player/player.tscn" id="3_df7pc"]
+[ext_resource type="PackedScene" uid="uid://udeixpksmx8j" path="res://Objects/rock_object.tscn" id="4_35gfg"]
+
+[node name="World" type="Node2D"]
+
+[node name="Boss Chonky" parent="." instance=ExtResource("1_ck8t5")]
+position = Vector2(1035, 542)
+
+[node name="Level_1" parent="." instance=ExtResource("1_7mv3a")]
+layer = -1
+
+[node name="Player" parent="." instance=ExtResource("3_df7pc")]
+position = Vector2(-705, 438)
+
+[node name="RockObject" parent="." instance=ExtResource("4_35gfg")]
+position = Vector2(1193, 536)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkalmgdghv6n1"]
+
+[ext_resource type="PackedScene" uid="uid://7x2godgv6rtu" path="res://Weapons/LaserBeam/laser_beam_2d.tscn" id="1_iqinl"]
+
+[sub_resource type="Environment" id="Environment_rkwjm"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="LaserBeam" type="Node2D"]
+
+[node name="LaserBeam2D" parent="." instance=ExtResource("1_iqinl")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rkwjm")

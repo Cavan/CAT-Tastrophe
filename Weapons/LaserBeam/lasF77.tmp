@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://7x2godgv6rtu"]
+
+[ext_resource type="Script" path="res://Weapons/LaserBeam/laser_beam_2d.gd" id="1_mh4fq"]
+[ext_resource type="Texture2D" uid="uid://w8m863gduyn0" path="res://Weapons/Assets/glowing_circle.png" id="2_0pdgk"]
+
+[sub_resource type="Gradient" id="Gradient_bunv4"]
+offsets = PackedFloat32Array(0.15, 0.886364, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0614r"]
+gradient = SubResource("Gradient_bunv4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecjlx"]
+particle_flag_disable_z = true
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_0614r")
+
+[sub_resource type="Curve" id="Curve_vrlpf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_okuum"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jmaa0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_xv0rd"]
+curve_x = SubResource("Curve_vrlpf")
+curve_y = SubResource("Curve_okuum")
+curve_z = SubResource("Curve_jmaa0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hya8m"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(60, 20, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_max = 100.0
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveXYZTexture_xv0rd")
+
+[sub_resource type="Gradient" id="Gradient_goic4"]
+offsets = PackedFloat32Array(0.1875, 0.9875, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.54375, 0.54375, 0.54375, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_seujj"]
+gradient = SubResource("Gradient_goic4")
+
+[sub_resource type="Curve" id="Curve_6gdx1"]
+_data = [Vector2(0.0164835, 1), 0.0, 0.0, 0, 0, Vector2(0.521978, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aia0p"]
+curve = SubResource("Curve_6gdx1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pdljf"]
+particle_flag_disable_z = true
+spread = 50.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_aia0p")
+color_ramp = SubResource("GradientTexture1D_seujj")
+
+[node name="LaserBeam2D" type="RayCast2D"]
+position = Vector2(0, 1)
+target_position = Vector2(62, 0)
+script = ExtResource("1_mh4fq")
+
+[node name="FillLine2D" type="Line2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1.5, 1.5, 1.5, 1)
+points = PackedVector2Array(0, 0, 100, 0)
+default_color = Color(0.246835, 0.752447, 1, 1)
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 8.0
+antialiased = true
+
+[node name="CastingGPUParticles2D" type="GPUParticles2D" parent="FillLine2D"]
+unique_name_in_owner = true
+modulate = Color(1.5, 1.5, 1.5, 1)
+show_behind_parent = true
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ecjlx")
+texture = ExtResource("2_0pdgk")
+lifetime = 0.3
+visibility_rect = Rect2(0, -18.722, 29.676, 38.484)
+
+[node name="BeamGPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1.5, 1.5, 1.5, 1)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_hya8m")
+texture = ExtResource("2_0pdgk")
+preprocess = 1.0
+randomness = 1.0
+visibility_rect = Rect2(-2500, -2500, 5000, 5000)
+
+[node name="CollisionGPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(1, -1)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_pdljf")
+texture = ExtResource("2_0pdgk")

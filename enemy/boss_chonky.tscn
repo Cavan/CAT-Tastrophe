@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmcffdesscyic"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_2nd72"]
+[ext_resource type="Texture2D" uid="uid://bik5utgysdm5j" path="res://enemy/chonky_cat.png" id="2_762dd"]
+
+[node name="Boss Chonky" type="Node2D"]
+position = Vector2(568, 307)
+script = ExtResource("1_2nd72")
+
+[node name="Chonky_Cat" type="Sprite2D" parent="."]
+position = Vector2(366, 202)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_762dd")
